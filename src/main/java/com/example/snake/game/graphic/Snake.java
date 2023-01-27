@@ -12,7 +12,12 @@ public final class Snake extends GraphicObject {
     }
 
     public enum Direction {
-        LEFT, RIGHT, UP, DOWN
+        LEFT(270), RIGHT(90), UP(0), DOWN(180);
+        public final double rotateAngle;
+
+        Direction(double rotateAngle) {
+            this.rotateAngle = rotateAngle;
+        }
     }
 
     private Map<Direction, SnakeMover> directionCellMoverMap;
@@ -20,7 +25,7 @@ public final class Snake extends GraphicObject {
     private final List<Cell> snakeBody;
     private final int objectSize;
     private int numberOfCellsToAdd = 0;
-    private volatile Direction direction;
+    private volatile Direction direction = Direction.UP;
     private final SnakeDrawer snakeDrawer;
 
     public static class Builder extends GraphicObject.Builder {
@@ -62,7 +67,7 @@ public final class Snake extends GraphicObject {
         directionCellMoverMap.get(direction).move(head);
 
         Cell cellAfterHead = snakeBody.size() > 1 ? snakeBody.get(1) : null;
-        snakeDrawer.drawSnakeHead(head, cellAfterHead, objectSize);
+        snakeDrawer.drawSnakeHead(head, direction, cellAfterHead, objectSize);
     }
 
     public void makeBigger() {
@@ -77,8 +82,7 @@ public final class Snake extends GraphicObject {
     @Override
     public void draw(Cell cell) {
         snakeBody.add(cell);
-        //snakeDrawer.drawCell(cell, objectSize);
-        snakeDrawer.drawSnakeHead(cell, null, objectSize);
+        snakeDrawer.drawSnakeHead(cell, direction, null, objectSize);
     }
 
 
