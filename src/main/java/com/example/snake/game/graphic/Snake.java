@@ -1,14 +1,14 @@
 package com.example.snake.game.graphic;
 
 import com.example.snake.game.drawers.SnakeDrawer;
-import com.example.snake.game.exceptions.SnakeCrushedExceptionIntoWall;
+import com.example.snake.game.exceptions.SnakeCrushedIntoWallException;
 
 import java.util.*;
 
 public final class Snake extends GraphicObject {
     @FunctionalInterface
     public interface SnakeMover {
-        void move(Cell head) throws SnakeCrushedExceptionIntoWall;
+        void move(Cell head) throws SnakeCrushedIntoWallException;
     }
 
     public enum Direction {
@@ -37,7 +37,7 @@ public final class Snake extends GraphicObject {
         snakeBody = new ArrayList<>();
     }
 
-    public void move() throws SnakeCrushedExceptionIntoWall {
+    public void move() throws SnakeCrushedIntoWallException {
         Cell tail;
         int numberOfCellToMove = snakeBody.size() - 1;
 

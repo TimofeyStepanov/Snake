@@ -1,7 +1,7 @@
 package com.example.snake.game.logic;
 
 import com.example.snake.game.drawers.SnakeDrawer;
-import com.example.snake.game.exceptions.SnakeCrushedExceptionIntoWall;
+import com.example.snake.game.exceptions.SnakeCrushedIntoWallException;
 import com.example.snake.game.graphic.Cell;
 import com.example.snake.game.graphic.Fruit;
 import com.example.snake.game.graphic.Snake;
@@ -32,25 +32,25 @@ public final class GameSnake implements Closeable {
                 Snake.Direction.LEFT, (cell) -> {
                     cell.x -= cellSize;
                     if (cell.x < 0) {
-                        throw new SnakeCrushedExceptionIntoWall();
+                        throw new SnakeCrushedIntoWallException();
                     }
                 },
                 Snake.Direction.RIGHT, (cell) -> {
                     cell.x += cellSize;
                     if (cell.x >= maxCellX) {
-                        throw new SnakeCrushedExceptionIntoWall();
+                        throw new SnakeCrushedIntoWallException();
                     }
                 },
                 Snake.Direction.DOWN, (cell) -> {
                     cell.y += cellSize;
                     if (cell.y >= maxCellY) {
-                        throw new SnakeCrushedExceptionIntoWall();
+                        throw new SnakeCrushedIntoWallException();
                     }
                 },
                 Snake.Direction.UP, (cell) -> {
                     cell.y -= cellSize;
                     if (cell.y < 0) {
-                        throw new SnakeCrushedExceptionIntoWall();
+                        throw new SnakeCrushedIntoWallException();
                     }
                 })
         ),
@@ -246,7 +246,7 @@ public final class GameSnake implements Closeable {
 
         try {
             snake.move();
-        } catch (SnakeCrushedExceptionIntoWall exception) {
+        } catch (SnakeCrushedIntoWallException exception) {
             restart();
         }
 

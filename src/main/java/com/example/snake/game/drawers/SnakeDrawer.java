@@ -36,7 +36,7 @@ public class SnakeDrawer implements Drawer {
             graphicsContext.fillRect(cell.x, cell.y, objectSize, objectSize);
 
             if (needToDrawFruit) {
-                FruitDrawer.fruitDrawer.drawCell(cell, objectSize);
+                FruitDrawer.fruitDrawer.redrawFruit(cell, objectSize);
                 needToDrawFruit = false;
             }
         });

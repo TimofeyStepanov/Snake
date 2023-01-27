@@ -17,10 +17,13 @@ public class FruitDrawer implements Drawer {
             this.image = image;
         }
 
+        public static FruitType fruitType;
+
         public static FruitType getRandomFruit() {
             FruitType[] fruitColors = FruitType.values();
             int randomColorNumber = (int) (Math.random() * ((fruitColors.length - 1) + 1));
-            return  fruitColors[randomColorNumber];
+            fruitType = fruitColors[randomColorNumber];
+            return fruitType;
         }
     }
 
@@ -34,6 +37,13 @@ public class FruitDrawer implements Drawer {
     private final GraphicsContext graphicsContext;
     private FruitDrawer(GraphicsContext graphicsContext) {
         this.graphicsContext = graphicsContext;
+    }
+
+
+    public void redrawFruit(Cell cell, int objectSize) {
+        Platform.runLater(() -> {
+            graphicsContext.drawImage(FruitType.fruitType.image, cell.x, cell.y, objectSize, objectSize);
+        });
     }
 
     @Override
