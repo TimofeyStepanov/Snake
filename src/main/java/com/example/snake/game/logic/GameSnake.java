@@ -239,6 +239,11 @@ public final class GameSnake implements Closeable {
     }
 
     private void step() {
+        if (snakeTailAndFruitAreTheSameCell()) {
+            // костыль для перекраски фрукта, если хвост змеи затрет фрукт
+            SnakeDrawer.needToRedrawFruitAfterSnakeMoving();
+        }
+
         try {
             snake.move();
         } catch (SnakeCrushedExceptionIntoWall exception) {
@@ -258,8 +263,6 @@ public final class GameSnake implements Closeable {
 
             fruit.draw(generateRandomCell());
             snake.makeBigger();
-        } else if (snakeTailAndFruitAreTheSameCell()) {
-            SnakeDrawer.needToRedrawFruitAfterSnakeMoving(); // костыль для перекраски фрукта, если хвост змеи затрет фрукт
         }
     }
 

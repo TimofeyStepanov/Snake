@@ -1,6 +1,7 @@
 package com.example.snake.game.drawers;
 
 import com.example.snake.game.graphic.Cell;
+import com.example.snake.game.graphic.Fruit;
 import javafx.application.Platform;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
